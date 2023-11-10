@@ -10,6 +10,7 @@ function App() {
   let main = useRoutes([
     { path: "/", element: <Feed posts={Posts}/> },
     { path: "/new", element: <New />},
+    { path: "/post/:id", element: <Post posts={Posts} />}
   ]);
 
   return (
