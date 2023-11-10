@@ -5,7 +5,10 @@
     "title": "semper quis lectus nulla at",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Iaculis nunc sed augue lacus viverra. Nulla porttitor massa id neque aliquam vestibulum. Consequat mauris nunc congue nisi vitae suscipit tellus mauris a. Rhoncus aenean vel elit scelerisque mauris pellentesque.",
     "upvotes": 7,
-    "comments": ["nisi est sit amet facilisis"]
+    "comments": [
+      "nisi est sit amet facilisis",
+      "ullamcorper a lacus vestibulum sed"
+    ]
   },
   {
     "id": 2,
@@ -13,7 +16,10 @@
     "title": "lorem ipsum dolor sit amet",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac turpis egestas maecenas pharetra. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Est sit amet facilisis magna etiam tempor orci. Enim eu turpis egestas pretium aenean.",
     "upvotes": 3,
-    "comments": ["scelerisque eu ultrices vitae auctor"]
+    "comments": [
+      "scelerisque eu ultrices vitae auctor",
+      "odio morbi quis commodo odio"
+    ]
   },
   {
     "id": 3,
@@ -21,7 +27,9 @@
     "title": "metus vulputate eu scelerisque felis",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac turpis egestas maecenas pharetra. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Est sit amet facilisis magna etiam tempor orci. Enim eu turpis egestas pretium aenean.",
     "upvotes": 3,
-    "comments": ["scelerisque eu ultrices vitae auctor"]
+    "comments": [
+      "scelerisque eu ultrices vitae auctor",
+      "leo duis ut diam quam"
+    ]
   }
-  
 ]
