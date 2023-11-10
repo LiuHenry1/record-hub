@@ -2,9 +2,13 @@ import "./App.css";
 import { useRoutes, Link } from "react-router-dom";
 import { IoIosFitness } from "react-icons/io";
 import Feed from "./pages/Feed";
+import New from "./pages/New";
 
 function App() {
-  let main = useRoutes([{ path: "/", element: <Feed /> }]);
+  let main = useRoutes([
+    { path: "/", element: <Feed /> },
+    { path: "/new", element: <New />},
+  ]);
 
   return (
     <>
