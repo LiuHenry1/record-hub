@@ -1,5 +1,7 @@
 import { getTimeSincePost } from "../utils";
 import { useParams } from "react-router-dom";
+import { HiOutlineChevronDoubleUp, HiPencil, HiTrash } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import "./Post.css";
 
 const Post = ({ posts }) => {
@@ -14,7 +16,18 @@ const Post = ({ posts }) => {
         <div>Posted {elapsedTimeRepr} ago</div>
         <h4>{post.title}</h4>
         <p>{post.content}</p>
-        <div>{post.upvotes} upvotes</div>
+        <div className="post-interactables">
+          <div className="post-upvote">
+            <HiOutlineChevronDoubleUp />
+            <div>{post.upvotes} upvotes</div>
+          </div>
+          <div className="post-update">
+            <Link to={`/edit/${post.id}`}>
+              <HiPencil />
+            </Link>
+            <HiTrash />
+          </div>
+        </div>
       </div>
       <div className="comment-section">
         <form className="comment-form">
