@@ -5,12 +5,14 @@ import Feed from "./pages/Feed";
 import New from "./pages/New";
 import Post from "./pages/Post";
 import Posts from "./data.json"
+import Edit from "./pages/Edit";
 
 function App() {
   let main = useRoutes([
     { path: "/", element: <Feed posts={Posts}/> },
     { path: "/new", element: <New />},
-    { path: "/post/:id", element: <Post posts={Posts} />}
+    { path: "/post/:id", element: <Post posts={Posts} />},
+    { path: "/edit/:id", element: <Edit posts={Posts} />},
   ]);
 
   return (
