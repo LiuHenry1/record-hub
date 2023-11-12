@@ -4,20 +4,13 @@ import { getTimeSincePost } from "../utils";
 import { supabase } from "../client";
 import { useEffect, useState } from "react";
 
-const Feed = () => {
+const Feed = ({data}) => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await supabase
-        .from("Posts")
-        .select()
-        .order("created_at", { ascending: true });
-
-        setPosts(data);
-    };
-
-    fetchPosts();
-  }, []);
+    if (data) {
+      setPosts(data);
+    }
+  }, [data]);
 
   const feed = posts.map((post) => {
     const elapsedTimeRepr = getTimeSincePost(post.created_at);
