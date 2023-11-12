@@ -1,8 +1,24 @@
 import { Link } from "react-router-dom";
 import "../utils";
 import { getTimeSincePost } from "../utils";
+import { supabase } from "../client";
+import { useEffect, useState } from "react";
 
-const Feed = ({ posts }) => {
+const Feed = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await supabase
+        .from("Posts")
+        .select()
+        .order("created_at", { ascending: true });
+
+        setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
   const feed = posts.map((post) => {
     const elapsedTimeRepr = getTimeSincePost(post.created_at);
 
