@@ -3,10 +3,49 @@ import { useParams } from "react-router-dom";
 import { HiOutlineChevronDoubleUp, HiPencil, HiTrash } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import "./Post.css";
+import { useEffect, useState } from "react";
+import { supabase } from "../client";
 
-const Post = ({ posts }) => {
+const Post = ({data, onUpdate}) => {
   const { id } = useParams();
-  const post = posts.filter((post) => post.id == id)[0];
+  const [post, setPost] = useState(null);
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+   if (data) {
+    setPost(data.filter(post => post.id == id)[0]);
+    console.log(data.filter(post => post.id == id)[0]);
+   }
+  }, [data]);
+
+  if (post == null) {
+    return null;
+  }
+
+  const handleChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleCommentClick = async (e) => {
+    await supabase
+      .from("Posts")
+      .update({ comments: [...post.comments, comment] })
+      .eq("id", post.id)
+      .select();
+
+    setComment("");
+    onUpdate(toggle => !toggle);
+  };
+
+  const handleUpvoteClick = async (e) => {
+    await supabase
+      .from("Posts")
+      .update({ upvotes: post.upvotes + 1 })
+      .eq("id", post.id)
+      .select();
+
+    onUpdate(toggle => !toggle);
+  };
 
   const elapsedTimeRepr = getTimeSincePost(post.created_at);
 
@@ -18,7 +57,7 @@ const Post = ({ posts }) => {
         <p>{post.content}</p>
         <div className="post-interactables">
           <div className="post-upvote">
-            <HiOutlineChevronDoubleUp />
+            <HiOutlineChevronDoubleUp onClick={handleUpvoteClick}/>
             <div>{post.upvotes} upvotes</div>
           </div>
           <div className="post-update">
@@ -31,8 +70,14 @@ const Post = ({ posts }) => {
       </div>
       <div className="comment-section">
         <form className="comment-form">
-          <textarea type="text" name="comment" placeholder="Add a comment" />
+          <textarea
+            onChange={handleChange}
+            type="text"
+            name="comment"
+            value={comment}
+          />
           <input
+            onClick={handleCommentClick}
             type="button"
             name="submit"
             placeholder="Comment"
