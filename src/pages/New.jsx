@@ -6,6 +6,7 @@ const New = ({ onUpdate }) => {
   const [post, setPost] = useState({
     title: "",
     content: "",
+    comments: []
   });
 
   const handleChange = (e) => {
