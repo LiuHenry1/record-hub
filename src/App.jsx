@@ -6,12 +6,30 @@ import New from "./pages/New";
 import Post from "./pages/Post";
 import Posts from "./data.json"
 import Edit from "./pages/Edit";
+import { useEffect, useState } from "react";
+import { supabase } from "./client";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await supabase
+        .from("Posts")
+        .select()
+        .order("created_at", { ascending: true });
+
+        setPosts(data);
+    };
+
+    fetchPosts();
+  }, [toggle])
+
   let main = useRoutes([
-    { path: "/", element: <Feed posts={Posts}/> },
-    { path: "/new", element: <New />},
-    { path: "/post/:id", element: <Post posts={Posts} />},
+    { path: "/", element: <Feed data={posts}/> },
+    { path: "/new", element: <New onUpdate={setToggle}/>},
+    { path: "/post/:id", element: <Post data={posts} onUpdate={setToggle}/>},
     { path: "/edit/:id", element: <Edit posts={Posts} />},
   ]);
 
