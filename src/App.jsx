@@ -12,22 +12,27 @@ import { supabase } from "./client";
 function App() {
   const [posts, setPosts] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [sort, setSort] = useState({
+    orderBy: "created_at",
+    condition: { ascending: true }
+  })
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await supabase
         .from("Posts")
         .select()
-        .order("created_at", { ascending: true });
+        .order(sort.orderBy, sort.condition);
 
         setPosts(data);
     };
 
     fetchPosts();
-  }, [toggle])
+  }, [toggle, sort])
 
   let main = useRoutes([
-    { path: "/", element: <Feed data={posts}/> },
+    { path: "/", element: <Feed data={posts} updateSort={setSort}/> },
     { path: "/new", element: <New onUpdate={setToggle}/>},
     { path: "/post/:id", element: <Post data={posts} onUpdate={setToggle}/>},
     { path: "/edit/:id", element: <Edit data={posts} onUpdate={setToggle}/>},
