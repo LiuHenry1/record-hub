@@ -47,6 +47,15 @@ const Post = ({data, onUpdate}) => {
     onUpdate(toggle => !toggle);
   };
 
+  const handleDeleteClick = async (e) => {
+    await supabase
+      .from("Posts")
+      .delete()
+      .eq("id", id);
+    
+    window.location ="/";
+  }
+
   const elapsedTimeRepr = getTimeSincePost(post.created_at);
 
   return (
@@ -64,7 +73,7 @@ const Post = ({data, onUpdate}) => {
             <Link to={`/edit/${post.id}`}>
               <HiPencil />
             </Link>
-            <HiTrash />
+            <HiTrash onClick={handleDeleteClick}/>
           </div>
         </div>
       </div>
