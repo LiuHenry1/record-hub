@@ -30,7 +30,7 @@ function App() {
     { path: "/", element: <Feed data={posts}/> },
     { path: "/new", element: <New onUpdate={setToggle}/>},
     { path: "/post/:id", element: <Post data={posts} onUpdate={setToggle}/>},
-    { path: "/edit/:id", element: <Edit posts={Posts} />},
+    { path: "/edit/:id", element: <Edit data={posts} onUpdate={setToggle}/>},
   ]);
 
   return (
