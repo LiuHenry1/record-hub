@@ -21,7 +21,7 @@ const New = ({ onUpdate }) => {
 
     await supabase.from("Posts").insert(post).select();
 
-    setPost({ title: "", content: "" });
+    setPost({...post, title: "", content: ""});
     onUpdate((toggle) => !toggle);
   };
 
