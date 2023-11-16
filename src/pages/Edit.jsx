@@ -57,7 +57,12 @@ const Edit = ({ data, onUpdate }) => {
               rows={8}
               cols={32}
             />
-            <input onClick={handleClick} type="button" value="Update Post" />
+            <input
+              className="edit-submit"
+              onClick={handleClick}
+              type="button"
+              value="Update Post"
+            />
           </form>
         </div>
       )}

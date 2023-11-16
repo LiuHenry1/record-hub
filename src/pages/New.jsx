@@ -6,7 +6,7 @@ const New = ({ onUpdate }) => {
   const [post, setPost] = useState({
     title: "",
     content: "",
-    comments: []
+    comments: [],
   });
 
   const handleChange = (e) => {
@@ -21,13 +21,14 @@ const New = ({ onUpdate }) => {
 
     await supabase.from("Posts").insert(post).select();
 
-    setPost({...post, title: "", content: ""});
+    setPost({ ...post, title: "", content: "" });
     onUpdate((toggle) => !toggle);
   };
 
   return (
     <div className="form-container">
       <form className="new-post">
+        <label for="title">Title</label>
         <input
           onChange={handleChange}
           type="text"
@@ -35,6 +36,7 @@ const New = ({ onUpdate }) => {
           placeholder="Title"
           value={post.title}
         />
+        <label for="content">Content</label>
         <textarea
           onChange={handleChange}
           type="text"
@@ -44,7 +46,12 @@ const New = ({ onUpdate }) => {
           cols={32}
           value={post.content}
         />
-        <input onClick={handleClick} type="button" value="Create Post" />
+        <input
+          className="new-submit"
+          onClick={handleClick}
+          type="button"
+          value="Create Post"
+        />
       </form>
     </div>
   );

@@ -6,16 +6,16 @@ import "./Post.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../client";
 
-const Post = ({data, onUpdate}) => {
+const Post = ({ data, onUpdate }) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-   if (data) {
-    setPost(data.filter(post => post.id == id)[0]);
-    console.log(data.filter(post => post.id == id)[0]);
-   }
+    if (data) {
+      setPost(data.filter((post) => post.id == id)[0]);
+      console.log(data.filter((post) => post.id == id)[0]);
+    }
   }, [data]);
 
   if (post == null) {
@@ -34,7 +34,7 @@ const Post = ({data, onUpdate}) => {
       .select();
 
     setComment("");
-    onUpdate(toggle => !toggle);
+    onUpdate((toggle) => !toggle);
   };
 
   const handleUpvoteClick = async (e) => {
@@ -44,17 +44,14 @@ const Post = ({data, onUpdate}) => {
       .eq("id", post.id)
       .select();
 
-    onUpdate(toggle => !toggle);
+    onUpdate((toggle) => !toggle);
   };
 
   const handleDeleteClick = async (e) => {
-    await supabase
-      .from("Posts")
-      .delete()
-      .eq("id", id);
-    
-    window.location ="/";
-  }
+    await supabase.from("Posts").delete().eq("id", id);
+
+    window.location = "/";
+  };
 
   const elapsedTimeRepr = getTimeSincePost(post.created_at);
 
@@ -66,26 +63,28 @@ const Post = ({data, onUpdate}) => {
         <p>{post.content}</p>
         <div className="post-interactables">
           <div className="post-upvote">
-            <HiOutlineChevronDoubleUp onClick={handleUpvoteClick}/>
-            <div>{post.upvotes} upvotes</div>
+            <HiOutlineChevronDoubleUp onClick={handleUpvoteClick} />
+            <div>{post.upvotes}</div>
           </div>
           <div className="post-update">
             <Link to={`/edit/${post.id}`}>
               <HiPencil />
             </Link>
-            <HiTrash onClick={handleDeleteClick}/>
+            <HiTrash onClick={handleDeleteClick} />
           </div>
         </div>
       </div>
       <div className="comment-section">
         <form className="comment-form">
           <textarea
+            className="comment-input"
             onChange={handleChange}
             type="text"
             name="comment"
             value={comment}
           />
           <input
+            className="comment-submit"
             onClick={handleCommentClick}
             type="button"
             name="submit"
