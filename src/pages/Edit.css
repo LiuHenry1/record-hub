@@ -1,0 +1,12 @@
+.update-post {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-post > label {
+  margin-top: 2rem;
+}
+
+.edit-submit {
+  margin-top: 2rem;
+}
